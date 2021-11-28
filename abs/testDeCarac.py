@@ -34,7 +34,11 @@ class TestDeCarac:
             affichageCarac = ""
             for carac in self.caracs_:
                 affichageCarac = "{}, {}".format(affichageCarac, carac)
-        return " ({}% en {})".format(self.CalculerPourcentageReussite(situation), affichageCarac)
+
+        pourcentageReussite = self.CalculerPourcentageReussite(situation)
+        if pourcentageReussite <= 0:
+            return u" - Réussite impossible, {} trop bas".format(affichageCarac)
+        return " ({}% en {})".format(pourcentageReussite, affichageCarac)
 
     def CalculerPourcentageReussite(self, situation):
         """
@@ -74,8 +78,8 @@ class TestDeCarac:
         [ 95,  85,  70,  50,  40,   5,   0,  0,  0,  0], # 0 : le seuil entre 0 (ne connaît rien à rien) et 1 (initié) est volontairement assez tranché
         [100,  95,  90,  70,  55,  20,  10,  0,  0,  0], # débutant, connaît
         [100,  98,  92,  75,  60,  25,  16,  0,  0,  0], # débutant, connaît
-        [100, 100,  95,  80,  65,  30,  22,  0,  0,  0], # débutant, connaît
-        [100, 100,  97,  85,  70,  35,  28,  0,  0,  0], # débutant, connaît
+        [100, 100,  95,  80,  65,  30,  22,  1,  0,  0], # débutant, connaît
+        [100, 100,  97,  85,  70,  35,  28,  3,  0,  0], # débutant, connaît
         [100, 100, 100,  90,  75,  40,  34,  5,  0,  0], # 5 très avancé
         [100, 100, 100,  92,  80,  45,  40, 10,  0,  0], # très avancé
         [100, 100, 100,  95,  85,  50,  46, 20,  0,  0], # très avancé

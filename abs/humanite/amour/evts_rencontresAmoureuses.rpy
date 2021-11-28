@@ -127,21 +127,21 @@ label decFaireLaCour:
     $ MAJCaracsRelationsAmoureuses(situation_)
 
 label decRencontre:
-    $ amoureuse = pnj_destin.GenererRelationAmoureuseDestin(situation_) # Destin ajouté en attendant de trouver un meilleur système
+    $ amoureuse = pnj.GenererRelationAmoureuse(situation_)
     $ AjouterCetteAmoureuse(situation_, amoureuse)
     "Vous avez rencontré [amoureuse.nom_]."
     $ MAJCaracsRelationsAmoureuses(situation_)
     jump fin_cycle
 
 label decJoueurTombeAmoureux:
-    $ amoureuse = pnj_destin.GenererRelationAmoureuseDestin(situation_) # Destin ajouté en attendant de trouver un meilleur système
+    $ amoureuse = pnj.GenererRelationAmoureuse(situation_)
     $ AjouterCetteAmoureuse(situation_, amoureuse)
     "[amoureuse.nom_] vous fait complètement craquer."
     $ MAJCaracsRelationsAmoureuses(situation_)
     jump fin_cycle
 
 label decPnjTombeAmoureuse:
-    $ amoureuse = pnj_destin.GenererRelationAmoureuseDestin(situation_) # Destin ajouté en attendant de trouver un meilleur système
+    $ amoureuse = pnj.GenererRelationAmoureuse(situation_)
     $ AjouterCetteAmoureuse(situation_, amoureuse)
     "Cette [amoureuse.nom_] semble avoir un faible pour vous."
     $ MAJCaracsRelationsAmoureuses(situation_)

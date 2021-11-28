@@ -93,7 +93,7 @@ class Metier:
         0.01 = très rare (généticien, roboticien)
         """
         poids = 1.0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -164,7 +164,7 @@ class Robotique(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.01
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.2
         return poids
 
@@ -182,7 +182,6 @@ class Roi(Metier):
     def GetPoidsDemo(self, masculin, coterieObj):
         return 0
 
-
 class Berger(Metier):
     NOM = u"Berger"
     def __init__(self):
@@ -196,9 +195,23 @@ class Berger(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.01
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.4
         return poids
+
+class Roi(Metier):
+    NOM = u"Roi des francs"
+    def __init__(self):
+        self.nom_ = Roi.NOM
+
+    def GetNiveauRichesse(self):
+        return 9
+
+    def GetDiscipline(self):
+        return u"Royauté"
+
+    def GetPoidsDemo(self, masculin, coterieObj):
+        return 0
 
 class Stratege(Metier):
     NOM = u"Général"
@@ -227,7 +240,7 @@ class Danseur(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.002
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.1
         return poids
 
@@ -244,7 +257,7 @@ class Musicien(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -258,7 +271,7 @@ class Cuisinier(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 1.0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -275,7 +288,7 @@ class Acteur(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.2
         return poids
 
@@ -292,7 +305,7 @@ class Dessinateur(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -306,7 +319,7 @@ class Bibliothecaire(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.3
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -323,7 +336,7 @@ class Poete(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.01
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.1
         return poids
 
@@ -340,7 +353,7 @@ class Cartographe(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.01
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.2
         return poids
 
@@ -357,7 +370,7 @@ class Marchand(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.3
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -386,7 +399,7 @@ class Mineur(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.3
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -400,7 +413,7 @@ class Pretre(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.02
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -428,7 +441,7 @@ class Politique(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.02
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.2
         return poids
 
@@ -445,7 +458,7 @@ class Forgeron(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -462,7 +475,7 @@ class Alchimiste(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -479,7 +492,7 @@ class Medecin(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.2
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -496,7 +509,7 @@ class TueurDeMonstres(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -513,7 +526,7 @@ class Architecte(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.2
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -527,7 +540,7 @@ class Parasite(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -544,7 +557,7 @@ class Guerrier(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -579,7 +592,7 @@ class Chauffeur(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.5
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -599,7 +612,7 @@ class Pilote(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.01
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -616,7 +629,7 @@ class Mecanicien(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.05
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -630,7 +643,7 @@ class Chevalier(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.5
         return poids
 
@@ -650,7 +663,7 @@ class Informaticien(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.4
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -670,7 +683,7 @@ class Cyberneticien(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -696,7 +709,7 @@ class Geneticien(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -719,7 +732,7 @@ class Commercial(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.4
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -735,7 +748,7 @@ class Policier(Metier):
         poids = 0.3
         if masculin:
             poids = 1.5
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -758,7 +771,7 @@ class Vigile(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.4
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -775,7 +788,7 @@ class Banquier(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.3
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -792,7 +805,7 @@ class GardeDuCorps(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.04
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -809,7 +822,7 @@ class Electronique(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.3
         return poids
 
@@ -826,7 +839,7 @@ class Chasseur(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.02
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.4
         return poids
 
@@ -843,7 +856,7 @@ class Marin(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.1
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.4
         return poids
 
@@ -875,7 +888,7 @@ class Aventurier(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.001
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.4
         return poids
 
@@ -892,7 +905,7 @@ class Journaliste(Metier):
 
     def GetPoidsDemo(self, masculin, coterieObj):
         poids = 0.5
-        if self.nom_ in coterieObj.GetMetiersCompatibles():
+        if coterieObj is not None and self.nom_ in coterieObj.GetMetiersCompatibles():
             poids = poids + 0.5
         return poids
 
@@ -934,9 +947,6 @@ class CollectionMetiers:
 
         journaliste = Journaliste()
         self.SetMetier(Journaliste.NOM, journaliste)
-
-        berger = Berger()
-        self.SetMetier(Berger.NOM, berger)
 
         electronique = Electronique()
         self.SetMetier(Electronique.NOM, electronique)
@@ -1012,6 +1022,12 @@ class CollectionMetiers:
 
         cyberneticien = Cyberneticien()
         self.SetMetier(Cyberneticien.NOM, cyberneticien)
+
+        berger = Berger()
+        self.SetMetier(Berger.NOM, berger)
+
+        roi = Roi()
+        self.SetMetier(Roi.NOM, roi)
 
         geneticien = Geneticien()
         self.SetMetier(Geneticien.NOM, geneticien)
