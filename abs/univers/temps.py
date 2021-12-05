@@ -8,6 +8,7 @@ class Date:
     DATE = u"Date" # date actuelle depuis le début du calendrier (en jours)
     DATE_ANNEES = u"Date en années" # date actuelle depuis le début du calendrier (en années)
     DATE_NAISSANCE = u"Date de naissance" # date de naissance du perso depuis le début du calendrier (en jours)
+    MOIS_ACTUEL = u"Mois" # numéro de mois actuel (de 1 à 12)
     AGE_ANNEES = u"Age" # age du perso (en années)
 
     NB_JOURS_PAR_MOIS_GREG = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -46,6 +47,9 @@ class Date:
 
     def GetNbAnnees(self):
         return self.nbJours_/365
+
+    def GetNumMois(self):
+        return self.numMoisGregorien
 
     def GetNbJourAnnees(self):
         """
