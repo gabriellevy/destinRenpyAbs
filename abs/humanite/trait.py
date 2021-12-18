@@ -960,6 +960,32 @@ class Artiste(TraitGraduel):
         else:
             return ""
 
+class Ruse(TraitGraduel):
+
+    NOM = u"Ruse"
+
+    def __init__(self):
+        self.eTrait_ = Ruse.NOM
+
+    def GetDescription(self, situation):
+        val = situation[self.eTrait_]
+        if val == "":
+            val = 0
+            situation[self.eTrait_] = val
+        if not isinstance(val, int):
+            assert "Ce trait n'a pas comme valeur un int. Trait : {}. Valeur : {}".format(self.eTrait_, val)
+
+        if val <= Trait.SEUIL_A_PAS:
+            if val <= Trait.SEUIL_A_PAS_EXTREME:
+               return u"Gros nigaud"
+            return u"Naïf"
+        elif val >= Trait.SEUIL_A:
+            if val >= Trait.SEUIL_A_EXTREME:
+                return u"Machiavélique"
+            return u"Rusé"
+        else:
+            return ""
+
 class Richesse(TraitGraduel):
 
     NOM = u"Richesse"
@@ -1026,6 +1052,8 @@ class CollectionTraits:
 
     def __init__(self):
         self.lTraits_ = dict()
+        ruse = Ruse()
+        self.SetTrait(Ruse.NOM, ruse)
         liberte = Liberte()
         self.SetTrait(Liberte.NOM, liberte)
         assurance = Assurance()

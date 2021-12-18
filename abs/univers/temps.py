@@ -11,6 +11,11 @@ class Date:
     MOIS_ACTUEL = u"Mois" # numéro de mois actuel (de 1 à 12)
     AGE_ANNEES = u"Age" # age du perso (en années)
 
+    HIVER = "Hiver"
+    ETE = "Été"
+    PRINTEMPS = "Printemps"
+    AUTOMNE = "Automne"
+
     NB_JOURS_PAR_MOIS_GREG = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     NOMS_MOIS_GREG = [u"janvier", u"février", u"mars", u"avril", u"mai", u"juin", u"juillet", u"août", u"septembre", u"octobre", u"novembre", u"décembre"]
 
@@ -50,6 +55,17 @@ class Date:
 
     def GetNumMois(self):
         return self.numMoisGregorien
+
+    def GetSaison(self):
+        numMois = self.GetNumMois()
+        if numMois == 0 or numMois == 1 or numMois == 11:
+            return Date.HIVER
+        if numMois == 5 or numMois == 6 or numMois == 7:
+            return Date.ETE
+        if numMois == 2 or numMois == 3 or numMois == 4:
+            return Date.PRINTEMPS
+        if numMois == 8 or numMois == 9 or numMois == 10:
+            return Date.AUTOMNE
 
     def GetNbJourAnnees(self):
         """
