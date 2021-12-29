@@ -120,7 +120,7 @@ init -5 python:
         situation.SetValCarac(relationAmoureuse.RelA.C_RELATIONS_SEXUELLES_REGULIERES , aDesRelationsSexuellesRegulieres)
 
 label decFaireLaCour:
-    $ amoureuse = relationAmoureuse.GetUneAmoureuseEnSeduction(situation_) # A FAIRE : ne récupérez qu'une amoureuse d'un certain niveau ?
+    $ amoureuse = relationAmoureuse.GetUneAmoureuseEnSeduction(situation_)
     if amoureuse is not None:
         "[amoureuse.nom_] vous plaît tellement que vous tentez de la séduire par tous les moyens."
         $ relationAmoureuse.FaitLaCour(situation_, amoureuse)

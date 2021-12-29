@@ -421,6 +421,13 @@ class Situation:
         nbJoursPasses = 20 + random.randint(0, 20)
         self.AvanceDeXJours(nbJoursPasses)
 
+    def AvanceDeXMois(self, nbMois):
+        """
+        Passage au mois suivant grosso modo
+        """
+        nbJoursPasses = (28 + random.randint(0, 3))*nbMois
+        self.AvanceDeXJours(nbJoursPasses)
+
     # FONCTIONS GENERIQUES
     def __str__(self):
         """Affichage quand on affiche l'objet (print)"""
