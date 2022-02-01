@@ -199,20 +199,6 @@ class Berger(Metier):
             poids = poids + 0.4
         return poids
 
-class Roi(Metier):
-    NOM = u"Roi des francs"
-    def __init__(self):
-        self.nom_ = Roi.NOM
-
-    def GetNiveauRichesse(self):
-        return 9
-
-    def GetDiscipline(self):
-        return u"Royauté"
-
-    def GetPoidsDemo(self, masculin, coterieObj):
-        return 0
-
 class Stratege(Metier):
     NOM = u"Général"
     def __init__(self):
