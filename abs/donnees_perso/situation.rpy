@@ -102,12 +102,13 @@ init -20 python:
         #     date = temps.Date(nbJoursDate)
         #     self.caracs_[temps.Date.DATE] = date.nbJours_
         #     self.caracs_[temps.Date.AGE_ANNEES] = 0
-            self.collectionTraits = None
-            self.collectionMetiers = None
-            self.collectionBlessures = None
-            self.collectionMaladies = None
+            # self.collectionTraits = None
+            # self.collectionMetiers = None
+            # self.collectionBlessures = None
+            # self.collectionMaladies = None
             # self.collectionQuartiers = None
-            self.collectionPnjs = {}
+            # self.collectionPnjs = {}
+            self.inventaire_ = []
 
             self.run_optional_method( '__post_init__', id, **kwargs )
 
@@ -201,8 +202,8 @@ init -20 python:
 
                         pass
 
-            return ""
-            # return super(Situation, self).__getattr__(key)
+            # return "" # A FAIRE : fait déonner la sauvegarde : POURQUOI ?
+            return super(Situation, self).__getattr__(key)
 
 
         def __getattribute__(self, key):
@@ -247,7 +248,6 @@ init -20 python:
             return getattr(self, key)
 
         def __setitem__(self, key, val): # cet override n'est pas forcément une bonne idée mais c'est pratique
-            #self.caracs_[key] = val
             setattr(self, key, val)
 
         def GetValCarac(self, idCarac):
@@ -322,8 +322,8 @@ init -20 python:
 
             # self.SetCarac(idCarac, valCarac, valeurMin, valeurMax)
 
-        # def SetValCarac(self, idCarac, valCarac, valeurMin = "", valeurMax = ""):
-        #     self.SetCarac(idCarac, valCarac, valeurMin, valeurMax)
+        def SetValCarac(self, idCarac, valCarac, valeurMin = "", valeurMax = ""):
+            self.SetCarac(idCarac, valCarac, valeurMin, valeurMax)
 
         def GetMetier(self):
             valMetierStr = getattr(self, metier.Metier.C_METIER)
@@ -396,6 +396,8 @@ init -20 python:
             return str
 
         def AffichageMetier(self):
+            global metiers_
+
             strMetier = u""
             if not hasattr(self, metier.Metier.C_METIER):
                 strMetier = u"Sans emploi"
@@ -406,14 +408,14 @@ init -20 python:
 
             # afficher les compétences (en métier) :
             strComp = u""
-            for metierK in self.collectionMetiers.lMetiers_.keys():
+            for metierK in metiers_.lMetiers_.keys():
                 valMetier = self.GetValCaracInt(metierK)
                 if valMetier != "" and valMetier != 0:
-                    txtDiscipline = self.collectionMetiers.lMetiers_[metierK].GetDiscipline()
+                    txtDiscipline = metiers_.lMetiers_[metierK].GetDiscipline()
                     if txtDiscipline == "":
                         txtDiscipline = metierK
 
-                    txtCompetence = self.collectionMetiers.lMetiers_[metierK].GetTexteCompetence(valMetier)
+                    txtCompetence = metiers_.lMetiers_[metierK].GetTexteCompetence(valMetier)
                     strComp = u"{}\n - {} ({})".format(strComp, txtDiscipline, txtCompetence)
 
             if strComp != "":
@@ -522,9 +524,9 @@ init -20 python:
             return strPossession
 
         def AffichageQuartier(self):
-            if ( quartier.Quartier.C_QUARTIER not in self.caracs_):
+            if hasattr(self, quartier.Quartier.C_QUARTIER):
                 return u"Pas d'habitation !!"
-            return self.caracs_[quartier.Quartier.C_QUARTIER]
+            return getattr(self, quartier.Quartier.C_QUARTIER)
 
         def AffichageReligion(self):
             if not hasattr(self, religion.Religion.C_RELIGION):
@@ -587,7 +589,7 @@ init -20 python:
             """
             à overrider si la date du jeu destin a été overridée
             """
-            nbJours = self.caracs_[temps.Date.DATE]
+            nbJours = getattr(self, temps.Date.DATE)
             return temps.Date(nbJours)
 
         def GetDate(self, dateEnJours):
@@ -597,12 +599,12 @@ init -20 python:
             return temps.Date(dateEnJours)
 
         def AvanceDeXJours(self, nbJoursPasses):
-            nouvelleDateEnJours = self.caracs_[temps.Date.DATE] + nbJoursPasses
-            self.caracs_[temps.Date.DATE] = nouvelleDateEnJours
-            self.caracs_[temps.Date.DATE_ANNEES] = self.GetDate(nouvelleDateEnJours).GetNbAnnees()
-            self.caracs_[temps.Date.MOIS_ACTUEL] = self.GetDate(nouvelleDateEnJours).GetNumMois()
+            nouvelleDateEnJours = getattr(self, temps.Date.DATE) + nbJoursPasses
+            setattr(self, temps.Date.DATE, nouvelleDateEnJours)
+            setattr(self, temps.Date.DATE_ANNEES, self.GetDate(nouvelleDateEnJours).GetNbAnnees())
+            setattr(self, temps.Date.MOIS_ACTUEL, self.GetDate(nouvelleDateEnJours).GetNumMois())
             if self.GetValCarac(temps.Date.AGE_ANNEES) != "":
-                self.caracs_[temps.Date.AGE_ANNEES] = self.AgeEnAnnees()
+                setattr(self, temps.Date.AGE_ANNEES, self.AgeEnAnnees())
 
             # application des jours passés aux pnjs :
             for pnjObj in self.collectionPnjs.values():
@@ -621,7 +623,7 @@ init -20 python:
                 nbJoursConvalescence = nbJoursConvalescence - nbJoursPasses
                 if nbJoursConvalescence < 0:
                     nbJoursConvalescence = 0
-                self.caracs_[pbsante.PbSante.C_JOURS_DHOPITAL] = nbJoursConvalescence
+                setattr(self, pbsante.PbSante.C_JOURS_DHOPITAL, nbJoursConvalescence)
 
         def TourSuivant(self):
             """
@@ -636,3 +638,15 @@ init -20 python:
             """
             nbJoursPasses = (28 + random.randint(0, 3))*nbMois
             self.AvanceDeXJours(nbJoursPasses)
+
+    # --------------- INVENTAIRE --------------------------
+
+        def AjouterObjet(self, id):
+            global objets_
+            for objet in objets_:
+                print("Objet : {}".format(objet.id_))
+                print("id : {}".format(id))
+                if id == objet.id_:
+                    self.inventaire_.append(objet)
+                    return
+            print("erreur dans AjouterObjet : {} introuvable dans collectionObjets !".format(id))
